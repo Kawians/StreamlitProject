@@ -17,12 +17,6 @@ def preprocess_image(image):
     # Expand dimensions to match the input shape of your model
     input_image = np.expand_dims(normalized_image, axis=0)
     return input_image
-
-# Function to make predictions
-def make_prediction(image):
-    preprocessed_image = preprocess_image(image)
-    prediction = model.predict(preprocessed_image)
-    return prediction
     
 # Function to predict the gesture
 def predict_gesture(image):
@@ -44,9 +38,9 @@ def main():
         # Read the uploaded file
         image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
         # Convert the image to RGB format
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        grayscale_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Display the uploaded image
-        st.image(image, channels="RGB", use_column_width=True)
+        st.image(grayscale_image, channels="RGB", use_column_width=True)
 
         # Predict gesture
             gesture = predict_gesture(grayscale_image)
