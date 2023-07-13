@@ -1,56 +1,58 @@
 import streamlit as st
-import tensorflow as tf
+import cv2
 import numpy as np
+from tensorflow.keras.models import load_model
 
-# Load the pre-trained model
-model = tf.keras.models.load_model("rps_cnn.h5")
+# Load pre-trained model
+model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
-    image = tf.image.resize(image, (150, 150))
-    image = np.array(image) / 255.0
-    image = np.expand_dims(image, axis=0)
-    return image
+    # Resize the image to match the input size of your model
+    resized_image = cv2.resize(image, (224, 224))
+    # Convert the image to a numpy array
+    array_image = np.array(resized_image)
+    # Normalize the image
+    normalized_image = array_image / 255.0
+    # Expand dimensions to match the input shape of your model
+    input_image = np.expand_dims(normalized_image, axis=0)
+    return input_image
 
-# Function to predict the gesture
-def predict_gesture(image):
+# Function to make predictions
+def make_prediction(image):
     preprocessed_image = preprocess_image(image)
     prediction = model.predict(preprocessed_image)
-    predicted_class = np.argmax(prediction)
-    return predicted_class
+    return prediction
 
 # Streamlit app
 def main():
-    st.title("Rock Paper Scissors")
+    # Set page title
+    st.title("Camera Image Classification")
 
-    # Camera setup
-    camera_active = st.checkbox("Activate Camera")
+    # Open camera and capture image
+    cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        st.error("Unable to open the camera.")
+        return
 
-    if camera_active:
-        st.write("Camera is active.")
-        st.write("Get ready to make a gesture.")
+    # Capture image button
+    if st.button("Capture Image"):
+        ret, frame = cap.read()
+        if ret:
+            # Convert the captured frame to RGB format
+            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        # Capture image after 3 seconds
-        for i in range(3, 0, -1):
-            st.write(f"Capturing image in {i} seconds...")
-            time.sleep(1)
+            # Display the captured image
+            st.image(image, channels="RGB", use_column_width=True)
 
-        frame = st.camera_input()
+            # Make prediction on the captured image
+            prediction = make_prediction(image)
+            st.write("Prediction:", prediction)
+        else:
+            st.error("Failed to capture image.")
 
-        # Display the captured image
-        st.image(frame, channels="RGB")
+    # Release the camera
+    cap.release()
 
-        # Convert image to numpy array
-        image_np = np.array(frame)
-
-        # Predict gesture
-        gesture = predict_gesture(image_np)
-        if gesture == 0:
-            st.write("You made a Rock!")
-        elif gesture == 1:
-            st.write("You made a Paper!")
-        elif gesture == 2:
-            st.write("You made Scissors!")
-
-if _name_ == "_main_":
+if __name__ == '__main__':
     main()
