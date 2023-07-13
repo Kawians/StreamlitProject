@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Load pre-trained model
-model = load_model('path_to_your_model.h5')
+model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
