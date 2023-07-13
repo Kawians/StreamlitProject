@@ -23,7 +23,14 @@ def make_prediction(image):
     preprocessed_image = preprocess_image(image)
     prediction = model.predict(preprocessed_image)
     return prediction
-
+    
+# Function to predict the gesture
+def predict_gesture(image):
+    preprocessed_image = preprocess_image(image)
+    prediction = model.predict(preprocessed_image)
+    predicted_class = np.argmax(prediction)
+    return predicted_class
+    
 # Streamlit app
 def main():
     # Set page title
@@ -41,9 +48,14 @@ def main():
         # Display the uploaded image
         st.image(image, channels="RGB", use_column_width=True)
 
-        # Make prediction on the uploaded image
-        prediction = make_prediction(image)
-        st.write("Prediction:", prediction)
+        # Predict gesture
+            gesture = predict_gesture(grayscale_image)
+            if gesture == 0:
+                st.write("You made a Rock!")
+            elif gesture == 1:
+                st.write("You made a Paper!")
+            elif gesture == 2:
+                st.write("You made Scissors!")
 
 if __name__ == '__main__':
     main()
