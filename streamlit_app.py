@@ -1,14 +1,13 @@
 import streamlit as st
-import cv2
 import tensorflow as tf
 import numpy as np
 
 # Load the pre-trained model
-model = tf.keras.models.load_model("rock_paper_scissors_cnn.h5")
+model = tf.keras.models.load_model("rps_cnn.h5")
 
 # Function to preprocess the image
 def preprocess_image(image):
-    image = cv2.resize(image, (150, 150))
+    image = tf.image.resize(image, (150, 150))
     image = np.array(image) / 255.0
     image = np.expand_dims(image, axis=0)
     return image
@@ -25,33 +24,33 @@ def main():
     st.title("Rock Paper Scissors")
 
     # Camera setup
-    camera = cv2.VideoCapture(0)
+    camera_active = st.checkbox("Activate Camera")
 
-    if st.checkbox("Activate Camera"):
+    if camera_active:
         st.write("Camera is active.")
         st.write("Get ready to make a gesture.")
 
-        # Capture image
-        if st.button("Capture Image"):
-            _, frame = camera.read()
+        # Capture image after 3 seconds
+        for i in range(3, 0, -1):
+            st.write(f"Capturing image in {i} seconds...")
+            time.sleep(1)
 
-            # Display the captured image
-            st.image(frame, channels="BGR")
+        frame = st.camera_input()
 
-            # Convert image to grayscale
-            grayscale_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # Display the captured image
+        st.image(frame, channels="RGB")
 
-            # Predict gesture
-            gesture = predict_gesture(grayscale_image)
-            if gesture == 0:
-                st.write("You made a Rock!")
-            elif gesture == 1:
-                st.write("You made a Paper!")
-            elif gesture == 2:
-                st.write("You made Scissors!")
+        # Convert image to numpy array
+        image_np = np.array(frame)
 
-    # Release the camera
-    camera.release()
+        # Predict gesture
+        gesture = predict_gesture(image_np)
+        if gesture == 0:
+            st.write("You made a Rock!")
+        elif gesture == 1:
+            st.write("You made a Paper!")
+        elif gesture == 2:
+            st.write("You made Scissors!")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
