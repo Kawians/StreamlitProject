@@ -38,7 +38,7 @@ def main():
         # Read the uploaded file
         image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
         # Convert the image to RGB format
-        grayscale_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # Display the uploaded image
         st.image(grayscale_image, channels="RGB", use_column_width=True)
 
