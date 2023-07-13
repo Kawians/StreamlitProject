@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Load pre-trained model
-model = load_model('rock_paper_scissors_cnn.h5')
+model = load_model('path_to_your_model.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
@@ -27,32 +27,23 @@ def make_prediction(image):
 # Streamlit app
 def main():
     # Set page title
-    st.title("Camera Image Classification")
+    st.title("Image Classification")
 
-    # Open camera and capture image
-    cap = cv2.VideoCapture(0)
-    if not cap.isOpened():
-        st.error("Unable to open the camera.")
-        return
+    # File uploader
+    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-    # Capture image button
-    if st.button("Capture Image"):
-        ret, frame = cap.read()
-        if ret:
-            # Convert the captured frame to RGB format
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    # Perform prediction if an image is uploaded
+    if uploaded_file is not None:
+        # Read the uploaded file
+        image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
+        # Convert the image to RGB format
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        # Display the uploaded image
+        st.image(image, channels="RGB", use_column_width=True)
 
-            # Display the captured image
-            st.image(image, channels="RGB", use_column_width=True)
-
-            # Make prediction on the captured image
-            prediction = make_prediction(image)
-            st.write("Prediction:", prediction)
-        else:
-            st.error("Failed to capture image.")
-
-    # Release the camera
-    cap.release()
+        # Make prediction on the uploaded image
+        prediction = make_prediction(image)
+        st.write("Prediction:", prediction)
 
 if __name__ == '__main__':
     main()
