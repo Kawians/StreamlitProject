@@ -43,13 +43,13 @@ def main():
         st.image(grayscale_image, channels="RGB", use_column_width=True)
 
         # Predict gesture
-            gesture = predict_gesture(grayscale_image)
-            if gesture == 0:
-                st.write("You made a Rock!")
-            elif gesture == 1:
-                st.write("You made a Paper!")
-            elif gesture == 2:
-                st.write("You made Scissors!")
+        gesture = predict_gesture(grayscale_image)
+        if gesture == 0:
+            st.write("You made a Rock!")
+        elif gesture == 1:
+            st.write("You made a Paper!")
+        elif gesture == 2:
+            st.write("You made Scissors!")
 
 if __name__ == '__main__':
     main()
