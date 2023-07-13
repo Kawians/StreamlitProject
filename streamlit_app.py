@@ -10,7 +10,8 @@ model = load_model('rock_paper_scissors_cnn.h5')
 # Function to preprocess the image
 def preprocess_image(image):
     # Resize the image to match the input size of your model
-    image = tf.resize(image, (128, 128))
+    #image = tf.resize(image, (128, 128))
+    image = tf.image.resize(image, (128, 128))
     image = tf.cast(image, tf.float32) / 255.0
     # Normalize the image
     #normalized_image = array_image / 255.0
