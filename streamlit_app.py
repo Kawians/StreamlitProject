@@ -9,13 +9,9 @@ model = load_model('rock_paper_scissors_cnn.h5')
 # Function to preprocess the image
 def preprocess_image(image):
     # Resize the image to match the input size of your model
-    resized_image = cv2.resize(image, (224, 224))
-    # Convert the image to a numpy array
-    array_image = np.array(resized_image)
+    resized_image = cv2.resize(image, (128, 128))
     # Normalize the image
     normalized_image = array_image / 255.0
-    # Expand dimensions to match the input shape of your model
-    input_image = np.expand_dims(normalized_image, axis=0)
     return input_image
     
 # Function to predict the gesture
@@ -36,14 +32,13 @@ def main():
     # Perform prediction if an image is uploaded
     if uploaded_file is not None:
         # Read the uploaded file
-        image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
-        # Convert the image to RGB format
-        grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        #image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
+        image = preprocess_image(uploaded_file)
         # Display the uploaded image
-        st.image(grayscale_image, channels="RGB", use_column_width=True)
+        st.image(image, channels="RGB", use_column_width=True)
 
         # Predict gesture
-        gesture = predict_gesture(grayscale_image)
+        gesture = predict_gesture(image)
         if gesture == 0:
             st.write("You made a Rock!")
         elif gesture == 1:
