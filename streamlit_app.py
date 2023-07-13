@@ -1,6 +1,7 @@
 import streamlit as st
 import cv2
 import numpy as np
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 # Load pre-trained model
@@ -9,9 +10,10 @@ model = load_model('rock_paper_scissors_cnn.h5')
 # Function to preprocess the image
 def preprocess_image(image):
     # Resize the image to match the input size of your model
-    resized_image = cv2.resize(image, (128, 128))
+    image = tf.resize(image, (128, 128))
+    image = tf.cast(image, tf.float32) / 255.0
     # Normalize the image
-    normalized_image = array_image / 255.0
+    #normalized_image = array_image / 255.0
     return input_image
     
 # Function to predict the gesture
