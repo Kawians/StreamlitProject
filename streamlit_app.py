@@ -9,6 +9,8 @@ model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
 def preprocess_image(image):
+    # Read the image file
+    #img = cv2.imdecode(np.fromstring(image.read(), np.uint8), 1)
     # Resize the image to match the input size of your model
     #image = tf.resize(image, (128, 128))
     image = tf.image.resize(image, (128, 128))
@@ -35,7 +37,7 @@ def main():
     # Perform prediction if an image is uploaded
     if uploaded_file is not None:
         # Read the uploaded file
-        #image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
+        image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
         image = preprocess_image(uploaded_file)
         # Display the uploaded image
         st.image(image, channels="RGB", use_column_width=True)
