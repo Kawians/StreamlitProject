@@ -5,11 +5,9 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 # Load pre-trained model
-# the main model that we saved in mini-project is loaded here:
 model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
-# in this function image is normalized and resized.
 def preprocess_image(image):
     img = cv2.resize(image, (128, 128))
     img = tf.cast(img, tf.float32) / 255.0
@@ -26,15 +24,15 @@ def predict_gesture(image):
 # Streamlit app
 def main():
     # Set page title
-    st.title("Rock Paper Scissors Classification")
+    st.title("Image Classification")
 
-    # File uploader
-    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    # Picture Taken
+    picture = st.camera_input("Take a picture")
 
     # Perform prediction if an image is uploaded
-    if uploaded_file is not None:
+    if picture:
         # Read the uploaded file
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        file_bytes = np.asarray(bytearray(picture.read()), dtype=np.uint8)
         image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
         # Display the uploaded image
@@ -43,7 +41,7 @@ def main():
         # Predict gesture
         gesture = predict_gesture(image)
 
-        # Display the predicted gesture: Rock, Paper and Scissors
+        # Display the predicted gesture
         if gesture == 0:
             st.write("You made a Rock!")
         elif gesture == 1:
