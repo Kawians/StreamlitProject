@@ -4,6 +4,3 @@ tensorflow==2.13.0
 tensorflow_datasets==4.9.2
 numpy==1.24.3
 opencv-python-headless==4.5.5.64
-streamlit_webrtc
-mediapipe==0.8.9.1
-Pillow
