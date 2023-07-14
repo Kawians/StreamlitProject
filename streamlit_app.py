@@ -9,7 +9,7 @@ from tensorflow.keras.models import load_model
 model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
-
+# in this function image is normalized and resized.
 def preprocess_image(image):
     img = cv2.resize(image, (128, 128))
     img = tf.cast(img, tf.float32) / 255.0
