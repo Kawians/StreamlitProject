@@ -5,9 +5,11 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 # Load pre-trained model
+# the main model that we saved in mini-project is loaded here:
 model = load_model('rock_paper_scissors_cnn.h5')
 
 # Function to preprocess the image
+
 def preprocess_image(image):
     img = cv2.resize(image, (128, 128))
     img = tf.cast(img, tf.float32) / 255.0
