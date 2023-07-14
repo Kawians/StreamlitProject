@@ -43,7 +43,7 @@ def main():
         # Predict gesture
         gesture = predict_gesture(image)
 
-        # Display the predicted gesture
+        # Display the predicted gesture: Rock, Paper, Scissors
         if gesture == 0:
             st.write("You made a Rock!")
         elif gesture == 1:
