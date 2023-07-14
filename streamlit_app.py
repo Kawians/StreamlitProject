@@ -26,7 +26,7 @@ def predict_gesture(image):
 # Streamlit app
 def main():
     # Set page title
-    st.title("Image Classification")
+    st.title("Rock Paper Scissors Classification")
 
     # File uploader
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
