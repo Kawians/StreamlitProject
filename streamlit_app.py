@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+import urllib
 
 # Load pre-trained model
 model = load_model('rock_paper_scissors_cnn.h5')
@@ -21,10 +22,16 @@ def predict_gesture(image):
     predicted_class = np.argmax(prediction)
     return predicted_class
 
+# Function to get randomly selected gesture image
+def get_random_gesture_image():
+    gesture_images = ["rock.jpg", "paper.jpg", "scissors.jpg"]  # Replace with actual file names
+    random_image = np.random.choice(gesture_images)
+    return random_image
+
 # Streamlit app
 def main():
     # Set page title
-    st.title("Rock, Paper, Scissors. Image Classification")
+    st.title("Rock, Paper, Scissors, Game")
 
     # Picture Taken
     picture = st.camera_input("Take a picture")
@@ -48,6 +55,31 @@ def main():
             st.write("You made Paper!")
         elif gesture == 2:
             st.write("You made Scissors!")
+
+        # Get randomly selected gesture image
+        gesture_image_file = get_random_gesture_image()
+        gesture_image = cv2.imread(gesture_image_file)
+
+        if gesture_image_file == "rock.jpg":
+            st.write("Computer made Rock!")
+            computer_gesture = 0
+        elif gesture_image_file == "paper.jpg":
+            st.write("Computer made Paper!")
+            computer_gesture = 1
+        elif gesture_image_file == "scissors.jpg":
+            st.write("Computer made Scissors!")
+            computer_gesture = 2
+
+        # Display the generated rock, paper, or scissors image
+        st.image(gesture_image, channels="BGR", use_column_width=True)
+
+        # Compare the gestures and declare the winner
+        if gesture == computer_gesture:
+            st.write("It's a tie!")
+        elif (gesture == 0 and computer_gesture == 2) or (gesture == 1 and computer_gesture == 0) or (gesture == 2 and computer_gesture == 1):
+            st.write("You win!")
+        else:
+            st.write("Computer wins!")
 
 if __name__ == '__main__':
     main()
