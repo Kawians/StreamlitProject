@@ -24,7 +24,7 @@ def predict_gesture(image):
 # Streamlit app
 def main():
     # Set page title
-    st.title("Image Classification")
+    st.title("Rock, Paper, Scissors. Image Classification")
 
     # Picture Taken
     picture = st.camera_input("Take a picture")
@@ -43,9 +43,9 @@ def main():
 
         # Display the predicted gesture
         if gesture == 0:
-            st.write("You made a Rock!")
+            st.write("You made Rock!")
         elif gesture == 1:
-            st.write("You made a Paper!")
+            st.write("You made Paper!")
         elif gesture == 2:
             st.write("You made Scissors!")
 
