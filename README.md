@@ -10,5 +10,12 @@ This is the link of the app: <br>
 https://rockpapergame.streamlit.app/ <br>
 <br>
 And this is a screen shot of app working properly.<br>
-https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg
+https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg <br>
+<br>
+<br>
+### Group Members:
+1- Dusan Birtasevice
+2- Narjes Amousoltani
+3- Tina Khazaei
+4- Kavian Mashayekhi
 
