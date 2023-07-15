@@ -13,8 +13,17 @@ And this is a screen shot of app working properly.<br>
 https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg <br>
 <br>
 <br>
+![image](https://github.com/Kawians/StreamlitProject/assets/31896340/39716c0a-54df-4aaf-b580-6602c9b026b3)
+![image](https://github.com/Kawians/StreamlitProject/assets/31896340/cec093bd-4022-4e7d-8fba-eacabbaffaa6)
+![image](https://github.com/Kawians/StreamlitProject/assets/31896340/b97e0913-1fc4-45d8-9188-0703d93b9739)
+![image](https://github.com/Kawians/StreamlitProject/assets/31896340/0af79742-56f1-45fa-ac57-d0ebaa9b51f4)
+
+
+
+
+
 ### Group Members:
-1- Dusan Birtasevice <br>
+1- Dusan Birtasevic <br>
 2- Narjes Amousoltani <br>
 3- Tina Khazaei <br>
 4- Kavian Mashayekhi
