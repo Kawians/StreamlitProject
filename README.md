@@ -10,5 +10,5 @@ This is the link of the app: <br>
 https://rockpapergame.streamlit.app/ <br>
 <br>
 And this is a screen shot of app working properly.<br>
-![GitHub Logo]([https://example.com/images/logo.png](https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg)https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg)
+https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-scissors.jpg
 
