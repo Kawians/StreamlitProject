@@ -23,8 +23,8 @@ https://raw.githubusercontent.com/Kawians/StreamlitProject/main/Rock-paper-sciss
 
 
 ### Group Members:
-1- Dusan Birtasevic <br>
-2- Narjes Amousoltani <br>
-3- Tina Khazaei <br>
-4- Kavian Mashayekhi
+1- Kavian Mashayekhi <br>
+2- Dusan Birtasevic <br>
+3- Narjes Amousoltani <br>
+4- Tina Khazaei <br>
 
